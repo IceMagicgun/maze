@@ -4,10 +4,11 @@ import main.HomeownerLine;
 import network.Link;
 import network.Server;
 import sun.misc.JavaLangAccess;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Date;
@@ -107,6 +108,7 @@ public class MyRoomFrame extends JFrame {
         chatarea.setLineWrap(true);
         chatarea.setEditable(false);
         chatarea.setFont(new Font("ºÚÌå", Font.PLAIN, 20));
+
         JScrollPane chatscroll = new JScrollPane();
         chatscroll.setViewportView(chatarea);
 
@@ -195,6 +197,7 @@ public class MyRoomFrame extends JFrame {
                     Map<String,String> map = chatQueue.take();
                     messages.append(map.get("talker") + ":" + map.get("message") + "\n");
                     chatarea.setText(messages.toString());
+                    chatarea.setCaretPosition(chatarea.getDocument().getLength());
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
