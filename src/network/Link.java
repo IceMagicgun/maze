@@ -79,13 +79,10 @@ public class Link {
 						e1.printStackTrace();
 					}
 					s=Utils.encrypt(s, key);
-//					System.out.println(s);
 	                try {
 	                    OutputStream os =socket.getOutputStream();
 	                    byte[] bytes=Utils.mGetBytes(s, "ISO8859-1");
-//						System.out.println(Utils.mNewString(bytes, "ISO8859-1"));
 	                    int l=bytes.length;
-//						System.out.println(l);
 	                    os.write(l>>8);
 	                    os.write(l);
 	                	os.write(bytes);
@@ -120,16 +117,12 @@ public class Link {
 						}
 					}
 	                String s=Utils.mNewString(bytes, "ISO8859-1");
-	                String _s = new String(s);
 //	                System.out.println("接收到字符串："+s);
 	                s=Utils.decrypt(s, key);
 	                try {
 						getQ.put(s);
 					} catch (InterruptedException e) {
-	                	//System.out.println(_s);
 						e.printStackTrace();
-					}finally {
-	                	System.out.println(_s);
 					}
 	            } catch (IOException e) {
                 	System.out.println(String.format("与%s的连接发生异常，即将断开连接...", name));
