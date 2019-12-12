@@ -119,7 +119,7 @@ public class RoomLine {
 					}
 					break;
 				case "game":
-					gameLine=new GameLine(link,Integer.parseInt(map.get("role")+2));
+					gameLine=new GameLine(link,Integer.parseInt(map.get("role"))+2);
 					break;
 				default:
 					try {
