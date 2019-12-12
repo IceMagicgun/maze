@@ -108,7 +108,6 @@ public class Link {
 	                int i2=is.read();
 	                int l=(i1<<8)+i2,i=0;
 	                byte[] bytes=new byte[l];
-					System.out.println(l);
 					while(l>0) {
 						is.read(bytes, i, l);
 						while(l>0&&bytes[i]!='\0'){
