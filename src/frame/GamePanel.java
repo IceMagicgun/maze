@@ -81,6 +81,8 @@ public class GamePanel extends JPanel {
                 }
             }
         }).start();
+
+        new Thread(new isGameOver()).start();
     }
 
     private void initStagePanel(){
@@ -128,6 +130,12 @@ public class GamePanel extends JPanel {
         @Override
         public void run() {
             while(gameLine.getStatus() == 0){
+                System.out.println(gameLine.getStatus());
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
             stagepanel.setEnabled(false);
