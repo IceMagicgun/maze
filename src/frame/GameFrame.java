@@ -52,6 +52,8 @@ public class GameFrame extends JFrame {
 
     private void initStagePanel(){
 
+        stagepanel = new JPanel();
+
         stagepanel.setPreferredSize(new Dimension(1000, 1000));
         add(stagepanel, BorderLayout.CENTER);
 
