@@ -90,13 +90,13 @@ public class GamePanel extends JPanel {
         stagepanel = new StagePanel(gameLine);
 
         stagepanel.setBackground(Color.white);
-        stagepanel.setPreferredSize(new Dimension(930, 930));
+        stagepanel.setPreferredSize(new Dimension(939, 962));
         stagepanel.setBorder(new MatteBorder(1, 1, 1, 1, Color.black));
 
         initInfoPanel();
 
         JPanel p = new JPanel(new BorderLayout());
-        p.setPreferredSize(new Dimension(930, 1000));
+        p.setPreferredSize(new Dimension(939, 1000));
         p.add(stagepanel, BorderLayout.CENTER);
         p.add(infopanel, BorderLayout.SOUTH);
 
@@ -107,7 +107,7 @@ public class GamePanel extends JPanel {
     private void initInfoPanel(){
 
         infopanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        infopanel.setPreferredSize(new Dimension(930, 70));
+        infopanel.setPreferredSize(new Dimension(939, 38));
 
         JLabel info = new JLabel("√‘π¨¥Û–°£∫" + stage.length + "x" + stage.length);
         info.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 20));
@@ -130,7 +130,6 @@ public class GamePanel extends JPanel {
         @Override
         public void run() {
             while(gameLine.getStatus() == 0){
-                System.out.println(gameLine.getStatus());
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {

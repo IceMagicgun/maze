@@ -14,7 +14,7 @@ import java.io.File;
 
 public class testFrame extends JFrame {
 
-    private int w = 1800, h = 1000;
+    private int w = 939, h = 962;
     private JPanel p;
     private int[][] stage;
     private int indexX = 0, indexY = 0;

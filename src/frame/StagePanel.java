@@ -12,7 +12,6 @@ import java.io.File;
 public class StagePanel extends JPanel {
 
     private GameLine gameLine;
-    private int flag = 0;
 
     public StagePanel(GameLine gameLine){ this.gameLine = gameLine; }
 
