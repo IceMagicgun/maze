@@ -146,6 +146,7 @@ public class GameLine {
 		public void run() {
 			while(true) {
 				if(!isAlive) break;
+				status=stage.getStatus();
 				Map<String,String> map1=new HashMap<>();
 				map1.put("type", "stage");
 				map1.put("stage", JSON.cellToString(stage.getStage()));
