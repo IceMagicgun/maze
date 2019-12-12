@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import other.Utils;
@@ -22,6 +23,14 @@ public class Link {
 	Link(Socket socket,String key){
 		id=Utils.getUUID();
 		this.socket=socket;
+
+		try {
+			this.socket.setSendBufferSize(1024*1024*5);
+			this.socket.setReceiveBufferSize(1024*1024*5);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+
 		this.key=key;
 		alive=true;
 		ping=0;

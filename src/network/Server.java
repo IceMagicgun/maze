@@ -54,7 +54,7 @@ public class Server implements Runnable {
             }
         }
 
-        if(k>10) System.out.println("服务器未能正常启动...\n");
+		if(k>10) System.out.println("服务器未能正常启动...\n");
         else {
         	new Thread(new Broadcast()).start();
         	new Thread(new RefreshLinkList()).start();
