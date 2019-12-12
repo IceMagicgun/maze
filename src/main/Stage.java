@@ -137,6 +137,7 @@ public class Stage {
 		stage[x][y].isLead=true;
 		trigger();
 		lock.unlock();
+		System.out.println("***up***");
 	}
 	
 	public void down() {
@@ -146,6 +147,7 @@ public class Stage {
 		stage[x][y].isLead=true;
 		trigger();
 		lock.unlock();
+		System.out.println("***dows***");
 	}
 	
 	public void left() {
@@ -155,6 +157,7 @@ public class Stage {
 		stage[x][y].isLead=true;
 		trigger();
 		lock.unlock();
+		System.out.println("***left***");
 	}
 	
 	public void right() {
@@ -164,6 +167,7 @@ public class Stage {
 		stage[x][y].isLead=true;
 		trigger();
 		lock.unlock();
+		System.out.println("***right***");
 	}
 	
 	public void click(int x,int y) {
