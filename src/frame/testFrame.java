@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
+import java.io.File;
 
 public class testFrame extends JFrame {
 
@@ -55,7 +56,7 @@ public class testFrame extends JFrame {
             }
         });
 
-        p.addKeyListener(new KeyAdapter() {
+        addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 Graphics g = p.getGraphics();
@@ -83,7 +84,7 @@ public class testFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
         setVisible(true);
-        p.requestFocus();
+        requestFocus();
         new Thread(new DrawStage(p)).start();
     }
 
@@ -139,7 +140,7 @@ public class testFrame extends JFrame {
             for(int u = 0; u < stage.length; ++u){
                 for(int v = 0; v < stage[u].length; ++v){
                     if(stage[u][v] != 0){
-                        g.drawImage(new ImageIcon("src/image/type_" + stage[u][v] + ".png").getImage(), v * k + 1, u * k + 1, 28, 28, new ImageObserver() {
+                        g.drawImage(new ImageIcon(new File("").getAbsolutePath()+File.separator + "src/image/type_" + stage[u][v] + ".png").getImage(), v * k + 1, u * k + 1, 28, 28, new ImageObserver() {
                             @Override
                             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                                 return false;

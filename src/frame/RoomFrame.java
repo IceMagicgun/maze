@@ -2,7 +2,6 @@ package frame;
 
 import main.RoomLine;
 import network.Client;
-import network.Server;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -11,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -26,6 +24,7 @@ public class RoomFrame extends JFrame {
     private JPanel center;
     private JTextField name, input;
     private Thread chatthread;
+    private GamePanel gamePanel;
 
     public RoomFrame(String roomownername, Client client){
 
@@ -132,12 +131,18 @@ public class RoomFrame extends JFrame {
                     if(roomLine.getGameLine() != null){
                         messages.append("房主已开始游戏......\n");
                         chatarea.setText(messages.toString());
-                        new GameFrame(roomLine, roomLine.getGameLine());
-                        dispose();
-                        //chatthread.stop();
                         messages.append("正在加载......\n");
                         chatarea.setText(messages.toString());
                         Thread.sleep(1000);
+                        setVisible(false);
+                        getContentPane().removeAll();
+                        w = 1430; h = 1000;
+                        setSize(w, h);
+                        setLocationRelativeTo(null);
+                        add(center, BorderLayout.WEST);
+                        gamePanel = new GamePanel(roomLine.getGameLine());
+                        add(gamePanel, BorderLayout.CENTER);
+                        setVisible(true);
                         break;
                     }
                     Thread.sleep(1000);

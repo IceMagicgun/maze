@@ -3,19 +3,14 @@ package frame;
 import main.HomeownerLine;
 import network.Link;
 import network.Server;
-import sun.misc.JavaLangAccess;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MyRoomFrame extends JFrame {
 
@@ -23,7 +18,7 @@ public class MyRoomFrame extends JFrame {
     private Server server;
     private HomeownerLine homeownerLine;
     private JTextField roomname;
-    private JPanel top, center, bottom, left, right;
+    private JPanel top, center, bottom, chatpanel;
     private List<Link> playerlist;
     private JScrollPane playerscroll;
     private JButton refresh, startgame;
@@ -31,6 +26,7 @@ public class MyRoomFrame extends JFrame {
     private JTextField input, anothergamer, role;
     private StringBuffer messages;
     private Thread chatthread;
+    private GamePanel gamePanel;
 
     public MyRoomFrame() {
         server = new Server();
@@ -100,7 +96,7 @@ public class MyRoomFrame extends JFrame {
     private void initBottom(){
         bottom = new JPanel(new BorderLayout());
 
-        JPanel chatpanel = new JPanel(new BorderLayout());
+        chatpanel = new JPanel(new BorderLayout());
         chatpanel.setPreferredSize(new Dimension(500, 300));
         chatpanel.setBorder(new MatteBorder(2, 2, 2, 2, Color.black));
 
@@ -151,9 +147,15 @@ public class MyRoomFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 homeownerLine.game(playerlist.get(Integer.parseInt(anothergamer.getText())), Integer.parseInt(role.getText()));
-                new GameFrame(homeownerLine, homeownerLine.getGameLine());
-                dispose();
-                chatthread.stop();
+                setVisible(false);
+                getContentPane().removeAll();
+                w = 1430; h = 1000;
+                setSize(w, h);
+                setLocationRelativeTo(null);
+                add(chatpanel, BorderLayout.WEST);
+                gamePanel =  new GamePanel(homeownerLine.getGameLine());
+                add(gamePanel, BorderLayout.CENTER);
+                setVisible(true);
             }
         });
 
