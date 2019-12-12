@@ -147,7 +147,7 @@ public class Stage {
 		stage[x][y].isLead=true;
 		trigger();
 		lock.unlock();
-		System.out.println("***dows***");
+		System.out.println("***down***");
 	}
 	
 	public void left() {
@@ -246,6 +246,8 @@ public class Stage {
 			y=random.nextInt(15)*2+1;
 		}while(!flag[x][y]);
 		ans[x][y].isLead=true;
+		this.x=x;
+		this.y=y;
 		ans[x][y].type=0;
 		flag[x][y]=false;
 		
