@@ -38,6 +38,8 @@ public class GameLine {
 	public int getStatus() {
 		return status;
 	}
+
+	public int getRole(){return role;}
 	
 	public void up() {
 		if(role==2) stage.up();
