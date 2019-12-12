@@ -23,14 +23,6 @@ public class Link {
 	Link(Socket socket,String key){
 		id=Utils.getUUID();
 		this.socket=socket;
-
-		try {
-			this.socket.setSendBufferSize(1024*1024*5);
-			this.socket.setReceiveBufferSize(1024*1024*5);
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
-
 		this.key=key;
 		alive=true;
 		ping=0;
@@ -117,10 +109,16 @@ public class Link {
 	                int i1=is.read();
 	                if(i1==-1) break;
 	                int i2=is.read();
-	                int l=(i1<<8)+i2;
-	                byte[] bytes=new byte[(i1<<8)+i2];
-					System.out.println((i1<<8)+i2);
-	                is.read(bytes, 0, (i1<<8)+i2);
+	                int l=(i1<<8)+i2,i=0;
+	                byte[] bytes=new byte[l];
+					System.out.println(l);
+					while(l>0) {
+						is.read(bytes, i, l);
+						while(l>0&&bytes[i]!='\0'){
+							i++;
+							l--;
+						}
+					}
 	                String s=Utils.mNewString(bytes, "ISO8859-1");
 	                String _s = new String(s);
 //	                System.out.println("接收到字符串："+s);
@@ -132,8 +130,6 @@ public class Link {
 						e.printStackTrace();
 					}finally {
 	                	System.out.println(_s);
-	                	for(int i=0;i<l;i++) System.out.print(bytes[i]+" ");
-						System.out.println();
 					}
 	            } catch (IOException e) {
                 	System.out.println(String.format("与%s的连接发生异常，即将断开连接...", name));
