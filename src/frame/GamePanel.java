@@ -81,6 +81,8 @@ public class GamePanel extends JPanel {
                 }
             }
         }).start();
+
+        new Thread(new isGameOver()).start();
     }
 
     private void initStagePanel(){
