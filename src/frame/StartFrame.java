@@ -40,7 +40,7 @@ public class StartFrame extends JFrame {
             }
         });
 
-        tip = new JLabel("Stage Game @Verson " + Path.ver);
+        tip = new JLabel("Maze Game @Verson " + Path.ver);
         tip.setBounds(0, 448, 200, 30);
 
         setLayout(null);

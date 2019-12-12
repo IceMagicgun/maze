@@ -153,7 +153,7 @@ public class MyRoomFrame extends JFrame {
                 homeownerLine.game(playerlist.get(Integer.parseInt(anothergamer.getText())), Integer.parseInt(role.getText()));
                 new GameFrame(homeownerLine, homeownerLine.getGameLine());
                 dispose();
-                //chatthread.stop();
+                chatthread.stop();
             }
         });
 

@@ -115,6 +115,7 @@ public class RoomFrame extends JFrame {
                     Map<String,String> map = chatQueue.take();
                     messages.append(map.get("talker") + ":" + map.get("message") + "\n");
                     chatarea.setText(messages.toString());
+                    chatarea.setCaretPosition(chatarea.getDocument().getLength());
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
