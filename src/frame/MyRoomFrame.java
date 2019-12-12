@@ -186,7 +186,7 @@ public class MyRoomFrame extends JFrame {
 
     public class Chat implements Runnable{
         private ArrayBlockingQueue<Map<String,String>> chatQueue;
-
+ 
         public Chat(ArrayBlockingQueue<Map<String,String>> chatQueue){
             this.chatQueue=chatQueue;
         }
