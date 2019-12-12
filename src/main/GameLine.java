@@ -144,12 +144,15 @@ public class GameLine {
 	class RefreshStage implements Runnable{
 		@Override
 		public void run() {
+			int stage_order=0;
 			while(true) {
 				if(!isAlive) break;
 				status=stage.getStatus();
 				Map<String,String> map1=new HashMap<>();
 				map1.put("type", "stage");
 				map1.put("stage", JSON.cellToString(stage.getStage()));
+				map1.put("stage_order", String.valueOf(stage_order));
+				stage_order=(stage_order+1)%1000;
 				Map<String,String> map2=new HashMap<>();
 				map2.put("type", "status");
 				map2.put("status", String.valueOf(status));
@@ -167,6 +170,7 @@ public class GameLine {
 	class Process implements Runnable{
 		@Override
 		public void run() {
+			int stage_old=-1,stage_new;
 			while(true) {
 				if(!isAlive) break;
 				String s=null;
@@ -202,7 +206,11 @@ public class GameLine {
 					stage.click(Integer.parseInt(map.get("x")), Integer.parseInt(map.get("y")));
 					break;
 				case "stage":
-					cell=JSON.stringTOCell(map.get("stage"));
+					stage_new=Integer.parseInt(map.get("stage_order"));
+					if(stage_new>stage_old||stage_old-stage_new>900){
+						cell=JSON.stringTOCell(map.get("stage"));
+						stage_old=stage_new;
+					}
 					break;
 				case "status":
 					status=Integer.parseInt(map.get("status"));
