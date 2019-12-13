@@ -116,8 +116,10 @@ public class MyRoomFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    homeownerLine.chat(input.getText());
-                    input.setText("");
+                    if(input.getText().equals("")) {
+                        homeownerLine.chat(input.getText());
+                        input.setText("");
+                    }
                 }
             }
         });
@@ -148,12 +150,20 @@ public class MyRoomFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 homeownerLine.game(playerlist.get(Integer.parseInt(anothergamer.getText())), Integer.parseInt(role.getText()));
                 setVisible(false);
+                while (homeownerLine.getGameLine().getStage() == null){
+
+                }
+                gamePanel =  new GamePanel(homeownerLine.getGameLine());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
                 getContentPane().removeAll();
-                w = 1430; h = 1000;
+                w = 1440; h = 1000;
                 setSize(w, h);
                 setLocationRelativeTo(null);
                 add(chatpanel, BorderLayout.WEST);
-                gamePanel =  new GamePanel(homeownerLine.getGameLine());
                 add(gamePanel, BorderLayout.CENTER);
                 setVisible(true);
             }

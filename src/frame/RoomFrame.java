@@ -2,7 +2,6 @@ package frame;
 
 import main.RoomLine;
 import network.Client;
-
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -29,7 +28,7 @@ public class RoomFrame extends JFrame {
     public RoomFrame(String roomownername, Client client){
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -88,8 +87,10 @@ public class RoomFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    roomLine.chat(input.getText());
-                    input.setText("");
+                    if(input.getText().equals("")) {
+                        roomLine.chat(input.getText());
+                        input.setText("");
+                    }
                 }
             }
         });
@@ -133,14 +134,17 @@ public class RoomFrame extends JFrame {
                         chatarea.setText(messages.toString());
                         messages.append("ÕýÔÚ¼ÓÔØ......\n");
                         chatarea.setText(messages.toString());
-                        Thread.sleep(1000);
+                        while(roomLine.getGameLine().getStage() == null){
+
+                        }
+                        gamePanel = new GamePanel(roomLine.getGameLine());
                         setVisible(false);
+                        Thread.sleep(1000);
                         getContentPane().removeAll();
-                        w = 1430; h = 1000;
+                        w = 1440; h = 1000;
                         setSize(w, h);
                         setLocationRelativeTo(null);
                         add(center, BorderLayout.WEST);
-                        gamePanel = new GamePanel(roomLine.getGameLine());
                         add(gamePanel, BorderLayout.CENTER);
                         setVisible(true);
                         break;

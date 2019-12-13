@@ -15,7 +15,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class GamePanel extends JPanel {
 
-    private int w = 930, h = 1000;
+    private int w = 940, h = 1000;
     private Cell[][] stage;
     private JPanel stagepanel, infopanel, chatpanel;
     private JButton[][] stagecell;
@@ -64,6 +64,7 @@ public class GamePanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 requestFocus();
+                gameLine.click(e.getY()/30, e.getX()/30);
             }
         });
         requestFocus();
@@ -87,16 +88,16 @@ public class GamePanel extends JPanel {
 
     private void initStagePanel(){
 
-        stagepanel = new StagePanel(gameLine);
+        stagepanel = new StagePanel(gameLine, gameLine.getRole());
 
         stagepanel.setBackground(Color.white);
-        stagepanel.setPreferredSize(new Dimension(939, 962));
+        stagepanel.setPreferredSize(new Dimension(940, 962));
         stagepanel.setBorder(new MatteBorder(1, 1, 1, 1, Color.black));
 
         initInfoPanel();
 
         JPanel p = new JPanel(new BorderLayout());
-        p.setPreferredSize(new Dimension(939, 1000));
+        p.setPreferredSize(new Dimension(940, 1000));
         p.add(stagepanel, BorderLayout.CENTER);
         p.add(infopanel, BorderLayout.SOUTH);
 
@@ -107,7 +108,7 @@ public class GamePanel extends JPanel {
     private void initInfoPanel(){
 
         infopanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        infopanel.setPreferredSize(new Dimension(939, 38));
+        infopanel.setPreferredSize(new Dimension(940, 38));
 
         JLabel info = new JLabel("√‘π¨¥Û–°£∫" + stage.length + "x" + stage.length);
         info.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 20));
@@ -137,7 +138,7 @@ public class GamePanel extends JPanel {
                 }
 
             }
-            stagepanel.setEnabled(false);
+            gameLine.end();
             if(gameLine.getStatus() == 1) System.out.println("Victory!");
             else System.out.println("Defeat!");
         }

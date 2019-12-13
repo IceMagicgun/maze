@@ -11,10 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.util.Scanner;
 
 public class testFrame extends JFrame {
 
-    private int w = 939, h = 962;
+    private int w = 945, h = 962;
     private JPanel p;
     private int[][] stage;
     private int indexX = 0, indexY = 0;
@@ -140,7 +141,7 @@ public class testFrame extends JFrame {
             for(int u = 0; u < stage.length; ++u){
                 for(int v = 0; v < stage[u].length; ++v){
                     if(stage[u][v] != 0){
-                        g.drawImage(new ImageIcon(new File("").getAbsolutePath()+File.separator + "src/image/type_" + stage[u][v] + ".png").getImage(), v * k + 1, u * k + 1, 28, 28, new ImageObserver() {
+                        g.drawImage(new ImageIcon(this.getClass().getClassLoader().getResource("Image/type_" + stage[u][v] + ".png")).getImage(), v * k + 1, u * k + 1, 28, 28, new ImageObserver() {
                             @Override
                             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                                 return false;
@@ -157,9 +158,18 @@ public class testFrame extends JFrame {
 
     public static void main(String[] args) {
 
-        int[][] s = {{1,1,1,1,1,1,2,2,3,3,4,6}, {1,1,1,1,1,1,2,2,3,3,4,6}, {1,1,1,1,1,1,2,2,3,3,4,6}};
+//        int[][] s = {{1,1,1,1,1,1,4,4,3,3,4,5}, {1,1,1,1,1,1,4,4,3,3,4,5}, {1,1,1,1,1,1,4,4,3,3,4,5}};
+//
+//        new testFrame(s);
 
-        new testFrame(s);
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            x = Math.max(0, x - 7 + Math.min(30-x-7, 0));
+            y = Math.max(0, y - 7 + Math.min(30-y-7, 0));
+            System.out.println(x + " " + y);
+        }
     }
 
 }
