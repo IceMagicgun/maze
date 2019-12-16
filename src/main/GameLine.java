@@ -113,7 +113,7 @@ public class GameLine {
 	}
 	
 	public Cell[][] getStage(){
-		if(role==1) return stage.getStage();
+		if(role==1||role==2) return stage.getStage();
 		return cell;
 	}
 	
