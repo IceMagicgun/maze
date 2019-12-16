@@ -75,42 +75,42 @@ public class Stage {
 				lock.lock();
 				for(int i=0;i<high;i++) {
 					for(int j=0;j<width;j++) {
-						int timeX=time-stage[x][y].timePoint;
-						if(timeX<stage[x][y].time1) {
-							stage[x][y].status=1;
-							stage[x][y].time=stage[x][y].time1-timeX;
-						}else if(timeX<stage[x][y].time1+stage[x][y].time2) {
-							stage[x][y].status=2;
-							stage[x][y].time=stage[x][y].time1+stage[x][y].time2-timeX;
+						int timeX=time-stage[i][j].timePoint;
+						if(timeX<stage[i][j].time1) {
+							stage[i][j].status=1;
+							stage[i][j].time=stage[i][j].time1-timeX;
+						}else if(timeX<stage[i][j].time1+stage[i][j].time2) {
+							stage[i][j].status=2;
+							stage[i][j].time=stage[i][j].time1+stage[i][j].time2-timeX;
 						}else{
-							stage[x][y].status=0;
-							stage[x][y].time=0;
-						}
-						switch (stage[x][y].type) {
-						case 1:
-							status=2;
-							isAlive=false;
-							break;
-						case 2:
-							if(stage[x][y].status==2) {
-								status=2;
-								isAlive=false;
-							}
-							break;
-						case 3:
-							if(stage[x][y].status==0||stage[x][y].status==2) {
-								status=2;
-								isAlive=false;
-							}
-							break;
-						case 4:
-							status=1;
-							isAlive=false;
-							break;
-						default:
-							break;
+							stage[i][j].status=0;
+							stage[i][j].time=0;
 						}
 					}
+				}
+				switch (stage[x][y].type) {
+					case 1:
+						status=2;
+						isAlive=false;
+						break;
+					case 2:
+						if(stage[x][y].status==2) {
+							status=2;
+							isAlive=false;
+						}
+						break;
+					case 3:
+						if(stage[x][y].status==0||stage[x][y].status==2) {
+							status=2;
+							isAlive=false;
+						}
+						break;
+					case 4:
+						status=1;
+						isAlive=false;
+						break;
+					default:
+						break;
 				}
 				lock.unlock();
 				try {

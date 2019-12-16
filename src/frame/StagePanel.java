@@ -1,13 +1,11 @@
 package frame;
 
 import entry.Cell;
-import main.Game;
 import main.GameLine;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import java.io.File;
 
 public class StagePanel extends JPanel {
 
