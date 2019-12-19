@@ -33,7 +33,7 @@ public class ServerListFrame extends JFrame {
 
         top = new JPanel(new FlowLayout(FlowLayout.LEFT));
         top.add(title);
-        refresh = new JButton("Ë¢ÐÂ");
+        refresh = new RButton("Ë¢ÐÂ");
         refresh.setFont(new Font("ºÚÌå", Font.PLAIN, 15));
         refresh.addActionListener(new ActionListener() {
             @Override

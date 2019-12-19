@@ -21,9 +21,11 @@ public class MyRoomFrame extends JFrame {
     private JPanel top, center, bottom, chatpanel;
     private List<Link> playerlist;
     private JScrollPane playerscroll;
-    private JButton refresh, startgame;
+    private RButton refresh, startgame;
     private JTextArea chatarea;
-    private JTextField input, anothergamer, role;
+    private JTextField input, anothergamer;
+    private JRadioButton role1, role2;
+    private ButtonGroup role;
     private StringBuffer messages;
     private Thread chatthread;
     private GamePanel gamePanel;
@@ -72,9 +74,8 @@ public class MyRoomFrame extends JFrame {
         JLabel title = new JLabel("PlayerList: ");
         title.setFont(new Font("黑体", Font.PLAIN, 20));
 
-        refresh = new JButton("刷新");
+        refresh = new RButton("刷新");
         refresh.setFont(new Font("黑体", Font.PLAIN, 15));
-        refresh.setFocusPainted(false);
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,7 +117,7 @@ public class MyRoomFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    if(input.getText().equals("")) {
+                    if(!input.getText().equals("")) {
                         homeownerLine.chat(input.getText());
                         input.setText("");
                     }
@@ -132,23 +133,24 @@ public class MyRoomFrame extends JFrame {
 
         JLabel p1 = new JLabel("输入另一名玩家的序号:");
         p1.setFont(new Font("黑体", Font.PLAIN, 20));
-        JLabel p2 = new JLabel("选择角色序号:");
+        JLabel p2 = new JLabel("选择角色:");
         p2.setFont(new Font("黑体", Font.PLAIN, 20));
 
         anothergamer = new JTextField();
         anothergamer.setFont(new Font("黑体", Font.PLAIN, 20));
         anothergamer.setPreferredSize(new Dimension(80, 40));
-        role = new JTextField();
-        role.setFont(new Font("黑体", Font.PLAIN, 20));
-        role.setPreferredSize(new Dimension(80, 40));
-        role.setToolTipText("1：引路人，2：逃生者");
+        role1 = new JRadioButton("引路人", true);
+        role1.setFont(new Font("黑体", Font.PLAIN, 20));
+        role2 = new JRadioButton("逃生者");
+        role2.setFont(new Font("黑体", Font.PLAIN, 20));
+        role = new ButtonGroup();
+        role.add(role1); role.add(role2);
 
-        startgame = new JButton("开始游戏");
-        startgame.setFont(new Font("黑体", Font.PLAIN, 20));
+        startgame = new RButton("开始游戏");
         startgame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homeownerLine.game(playerlist.get(Integer.parseInt(anothergamer.getText())), Integer.parseInt(role.getText()));
+                homeownerLine.game(playerlist.get(Integer.parseInt(anothergamer.getText())+1), (role1.isSelected() ? 1 : 0));
                 setVisible(false);
                 while (homeownerLine.getGameLine().getStage() == null){
 
@@ -172,7 +174,7 @@ public class MyRoomFrame extends JFrame {
         JPanel pp1 = new JPanel();
         pp1.add(p1); pp1.add(anothergamer);
         JPanel pp2 = new JPanel();
-        pp2.add(p2); pp2.add(role);
+        pp2.add(p2); pp2.add(role1); pp2.add(role2);
         JPanel pp3 = new JPanel();
         pp3.add(startgame);
 

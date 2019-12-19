@@ -46,16 +46,12 @@ public class GamePanel extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_UP){
                     gameLine.up();
-                    System.out.println("up");
                 }else if(e.getKeyCode() == KeyEvent.VK_DOWN){
                     gameLine.down();
-                    System.out.println("down");
                 }else if(e.getKeyCode() == KeyEvent.VK_LEFT){
                     gameLine.left();
-                    System.out.println("left");
                 }else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
                     gameLine.right();
-                    System.out.println("right");
                 }
             }
         });
@@ -136,11 +132,10 @@ public class GamePanel extends JPanel {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
             gameLine.end();
-            if(gameLine.getStatus() == 1) System.out.println("Victory!");
-            else System.out.println("Defeat!");
+            if(gameLine.getStatus() == 1) JOptionPane.showMessageDialog(null, "Victory!");
+            else JOptionPane.showMessageDialog(null, "Defeat!");
         }
     }
 

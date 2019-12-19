@@ -27,18 +27,17 @@ public class RoomFrame extends JFrame {
 
     public RoomFrame(String roomownername, Client client){
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         this.client = client;
 
         title = new JLabel("房主: " + roomownername);
         title.setFont(new Font("黑体", Font.BOLD, 20));
 
         messages = new StringBuffer("等待房主开始游戏.....\n");
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         roomLine = new RoomLine(client);
         chatthread = new Thread(new Chat(roomLine.getChat()));
         chatthread.start();
@@ -87,7 +86,7 @@ public class RoomFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    if(input.getText().equals("")) {
+                    if(!input.getText().equals("")) {
                         roomLine.chat(input.getText());
                         input.setText("");
                     }
@@ -131,8 +130,6 @@ public class RoomFrame extends JFrame {
                 try {
                     if(roomLine.getGameLine() != null){
                         messages.append("房主已开始游戏......\n");
-                        chatarea.setText(messages.toString());
-                        messages.append("正在加载......\n");
                         chatarea.setText(messages.toString());
                         while(roomLine.getGameLine().getStage() == null){
 

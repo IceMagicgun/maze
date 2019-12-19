@@ -3,22 +3,48 @@ package frame;
 import other.Path;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class StartFrame extends JFrame {
 
     private int w = 500, h = 500;
-    private JLabel tip;
-    private JButton createRoom, findRoom;
+    private JLabel tip, title, p;
+    private RButton createRoom, findRoom;
 
     public StartFrame(){
-        createRoom = new JButton("创建房间");
-        createRoom.setFocusPainted(false);
-        createRoom.setBackground(Color.white);
-        createRoom.setFont(new Font("黑体", Font.PLAIN, 21));
-        createRoom.setBounds(300, 260, 120, 50);
+
+        title = new JLabel("双人迷宫游戏");
+        title.setFont(new Font("黑体", Font.BOLD, 45));
+        title.setBounds(100, 70, 300, 70);
+
+        p = new JLabel("->");
+        p.setBounds(165, 220, 50, 50);
+        p.setFont(new Font("黑体", Font.BOLD, 20));
+
+        createRoom = new RButton("创建房间");
+        createRoom.setBounds(190, 220, 120, 50);
+        createRoom.requestFocus();
+        createRoom.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    new MyRoomFrame();
+                    dispose();
+                }else if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN){
+                    p.setBounds(165, 320, 120, 50);
+                    findRoom.requestFocus();
+                }
+            }
+        });
+        createRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                p.setBounds(165, 220, 120, 50);
+                createRoom.requestFocus();
+            }
+        });
         createRoom.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,11 +53,27 @@ public class StartFrame extends JFrame {
             }
         });
 
-        findRoom = new JButton("查找房间");
-        findRoom.setFocusPainted(false);
-        findRoom.setBackground(Color.white);
-        findRoom.setFont(new Font("黑体", Font.PLAIN, 21));
-        findRoom.setBounds(300, 340, 120, 50);
+        findRoom = new RButton("查找房间");
+        findRoom.setBounds(190, 320, 120, 50);
+        findRoom.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    new ServerListFrame();
+                    dispose();
+                }else if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN){
+                    p.setBounds(165, 220, 120, 50);
+                    createRoom.requestFocus();
+                }
+            }
+        });
+        findRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                p.setBounds(165, 320, 120, 50);
+                findRoom.requestFocus();
+            }
+        });
         findRoom.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +86,8 @@ public class StartFrame extends JFrame {
         tip.setBounds(0, 448, 200, 30);
 
         setLayout(null);
+        add(p);
+        add(title);
         add(createRoom);
         add(findRoom);
         add(tip);
@@ -53,6 +97,8 @@ public class StartFrame extends JFrame {
         setDefaultCloseOperation(3);
         setVisible(true);
     }
+
+
 
     public static void main(String[] args) {
         new StartFrame();
