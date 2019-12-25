@@ -76,7 +76,7 @@ public class ServerListFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             for(int u = 0; u < serverlist.size(); ++u){
                 if(e.getSource() == rooms[u]){
-                    Client client = new Client(serverlist.get(u), JOptionPane.showInputDialog("ÇëÊäÈëêÇ³Æ"));
+                    Client client = new Client(serverlist.get(u-1), JOptionPane.showInputDialog("ÇëÊäÈëêÇ³Æ"));
                     new RoomFrame(serverlist.get(u).name, client);
                     dispose();
                 }
