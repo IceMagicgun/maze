@@ -62,7 +62,7 @@ public class ServerListFrame extends JFrame {
         Box roombox = Box.createVerticalBox();
         rooms = new JButton[serverlist.size()];
         for (int u = 0; u < serverlist.size(); ++u) {
-            rooms[u] = new JButton("Room" + (u) + ": " + serverlist.get(u).name);
+            rooms[u] = new JButton("Room" + (u + 1) + ": " + serverlist.get(u).name);
             rooms[u].setFont(new Font("ºÚÌå", Font.PLAIN, 18));
             rooms[u].addActionListener(new JoinRoom());
             roombox.add(rooms[u]);
@@ -76,7 +76,7 @@ public class ServerListFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             for(int u = 0; u < serverlist.size(); ++u){
                 if(e.getSource() == rooms[u]){
-                    Client client = new Client(serverlist.get(u-1), JOptionPane.showInputDialog("ÇëÊäÈëêÇ³Æ"));
+                    Client client = new Client(serverlist.get(u), JOptionPane.showInputDialog("ÇëÊäÈëêÇ³Æ"));
                     new RoomFrame(serverlist.get(u).name, client);
                     dispose();
                 }
